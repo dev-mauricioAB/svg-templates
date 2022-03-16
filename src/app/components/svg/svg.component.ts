@@ -1,39 +1,15 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
-
-import { ContainerRefDirective } from 'src/app/directives/container-ref.directive';
-import { SvgIcon } from 'src/app/models/svg';
-import { SvgGenerateIconsService } from 'src/app/services/svg-generate.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-svg',
-  template: `<ng-template containerRef></ng-template>`,
+  template: `<h1>Hello svg component</h1>`,
   styleUrls: ['./svg.component.scss']
 })
-export class SvgComponent implements AfterViewInit {
+export class SvgComponent implements OnInit {
 
-  @Input() svgIconName!: string; // array com componentes de icons, criados pelo service (adicionar tipo)
+  constructor() { }
 
-  @ViewChild(ContainerRefDirective, { static: true }) containerRef!: ContainerRefDirective;
-
-  constructor(private svgService: SvgGenerateIconsService) { }
-
-  ngAfterViewInit() {
-    this.loadComponent();
+  ngOnInit(): void {
   }
 
-  loadComponent() {
-    const { component } = this.svgService.getSvgIconsComponents()
-      .find(({ props }) => props.name === this.svgIconName) as SvgIcon;
-
-    debugger
-
-    const viewContainerRef = this.containerRef.viewContainerRef;
-    viewContainerRef.clear();
-
-    try {
-      viewContainerRef.createComponent<SvgComponent>(component);
-    } catch (error) {
-      console.error(error);
-    }
-  }
 }
