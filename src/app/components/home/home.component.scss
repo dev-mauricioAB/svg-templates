@@ -15,8 +15,14 @@
 .content {
   width: 80vh;
   height: 50vh;
+  padding: 5px;
 
   background-color: #a8c7a4;
 
   border-radius: 5px;
+}
+
+:host ::ng-deep svg {
+  width: 5rem;
+  height: 5rem;
 }
