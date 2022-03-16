@@ -22,18 +22,17 @@ export class SvgComponent implements AfterViewInit {
   }
 
   loadComponent() {
-    const { component } = this.svgService.getSvgIconsComponents()
-      .find(({ props }) => props.name === this.svgIconName) as SvgIcon;
-
-    debugger
-
-    const viewContainerRef = this.containerRef.viewContainerRef;
-    viewContainerRef.clear();
-
     try {
+      const { component } = this.svgService.getSvgIconsComponents()
+        .find(({ props }) => props.name === this.svgIconName) as SvgIcon;
+
+      const viewContainerRef = this.containerRef.viewContainerRef;
+      viewContainerRef.clear();
+
       viewContainerRef.createComponent<SvgComponent>(component);
     } catch (error) {
-      console.error(error);
+      console.log(error);
+
     }
   }
 }
